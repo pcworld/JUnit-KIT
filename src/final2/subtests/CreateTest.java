@@ -15,7 +15,7 @@ import test.runs.Run;
  * 
  * @author Annika Berger
  * @author Roman Langrehr
- *
+ * 
  */
 public class CreateTest extends LangtonSubtest {
 
@@ -218,4 +218,60 @@ public class CreateTest extends LangtonSubtest {
 		};
 		sessionTest(runs, Input.getFile(inputFile), ALL_TYPES_RULE, ALL_TYPES_SPEEDUP);
 	}
+
+	/**
+	 * Asserts that each lazy ant has its own movement counter, i.e. a lazy ant created between other lazy ants' moves
+	 * must move in a different rhythm than the other ants.
+	 */
+	@Test
+	public void testCreatedLazyAntMovement() {
+		inputFile = new String[] {
+				"y000",
+				"0000",
+				"0000",
+				"0000"
+		};
+		runs = new Run[] {
+				checkPitch(inputFile),
+				move(1),
+				checkPitch(new String[] {
+						"0000",
+						"y000",
+						"0000",
+						"0000"
+				}),
+				new NoOutputRun("create z,2,2"),
+				checkPitch(new String[] {
+						"0000",
+						"y000",
+						"00z0",
+						"0000"
+
+				}),
+				move(1),
+				checkPitch(new String[] {
+						"0000",
+						"y000",
+						"0000",
+						"00z0"
+				}),
+				move(1),
+				checkPitch(new String[] {
+						"0000",
+						"3y00",
+						"0000",
+						"00z0"
+				}),
+				move(1),
+				checkPitch(new String[] {
+						"0000",
+						"3y00",
+						"0000",
+						"003z"
+				}),
+				quit()
+		};
+		sessionTest(runs, Input.getFile(inputFile), "rule=270-270-270-270-270", "speedup=2");
+	}
+
 }
