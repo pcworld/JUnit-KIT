@@ -1,6 +1,7 @@
 package final2.subtests;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.anyOf;
 
 import org.junit.Test;
 
@@ -123,7 +124,8 @@ public class DirectionTest extends LangtonSubtest {
 		};
 		runs = new Run[] {
 				move(1),
-				new ExactRun("direction a", is("NW")),
+				new ExactRun("direction a",
+						anyOf(is("NW"), is("SW") /* https://github.com/jGleitz/JUnit-KIT/issues/182 */)),
 				new ExactRun("position a", is("1,1")),
 				quit()
 		};
@@ -167,7 +169,8 @@ public class DirectionTest extends LangtonSubtest {
 		runs = new Run[] {
 				move(1), // to bring the ant in the starting position
 				move(1),
-				new ExactRun("direction a", is("NW")),
+				new ExactRun("direction a",
+						anyOf(is("NW"), is("SW") /* https://github.com/jGleitz/JUnit-KIT/issues/182 */)),
 				new ExactRun("position a", is("0,2")),
 				quit()
 		};
@@ -381,7 +384,8 @@ public class DirectionTest extends LangtonSubtest {
 		runs = new Run[] {
 				move(1), // to bring the ant in the starting position
 				move(1),
-				new ExactRun("direction a", is("NW")),
+				new ExactRun("direction a",
+						anyOf(is("NW"), is("SW") /* https://github.com/jGleitz/JUnit-KIT/issues/182 */)),
 				new ExactRun("position a", is("2,0")),
 				quit()
 		};
@@ -425,7 +429,8 @@ public class DirectionTest extends LangtonSubtest {
 		runs = new Run[] {
 				move(1), // to bring the ant in the starting position
 				move(1),
-				new ExactRun("direction a", is("NW")),
+				new ExactRun("direction a",
+						anyOf(is("NW"), is("SW") /* https://github.com/jGleitz/JUnit-KIT/issues/182 */)),
 				new ExactRun("position a", is("1,0")),
 				quit()
 		};
@@ -606,7 +611,8 @@ public class DirectionTest extends LangtonSubtest {
 		runs = new Run[] {
 				new ExactRun("direction a", is("N")),
 				move(1),
-				new ExactRun("direction a", is("NW")),
+				new ExactRun("direction a",
+						anyOf(is("NW"), is("SW") /* https://github.com/jGleitz/JUnit-KIT/issues/182 */)),
 				move(1),
 				new ExactRun("direction a", is("SW")),
 				quit()
